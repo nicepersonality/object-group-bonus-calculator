@@ -47,7 +47,6 @@ let employeesBonuses = [];
 
 function doesCoolStuff() {
   for (person of employees){
-    
     employeesBonuses.push(generateBonusInfo(person));
   };
 };
@@ -70,7 +69,7 @@ function EmployeeBonus(name, bonusPercentage, totalCompensation, totalBonus){
 function generateBonusInfo(employee){
 let employeeBonusInfo = new EmployeeBonus(
   name = employee.name,
-  bonusPercentage = bonusPercentCalc(),
+  bonusPercentage = bonusPercentCalc(employee),
   totalCompensation = totalCompensationCalc(),
   totalBonus = totalBonusCalc()
 )
@@ -80,17 +79,45 @@ return employeeBonusInfo;
 };
 
 // ### Individual Bonus calculation
-//  - Those who have a rating of a 2 or below should not receive a bonus.
+// - Those who have a rating of a 2 or below should not receive a bonus.
 // - Those who have a rating of a 3 should receive a base bonus of 4 % of their base annual income.
 // - Those who have a rating of a 4 should receive a base bonus of 6 % of their base annual income.
 // - Those who have a rating of a 5 should receive a base bonus of 10 % of their base annual income.
+
 // - If their employee number is 4 digits long, this means they have been with the company for longer than 15 years,
 //   and should receive an additional 5 %.
+
 // - However, if their annual income is greater than $65, 000, they should have their bonus adjusted down 1 %.
 // - No bonus can be above 13 % or below 0 % total.
 
-function bonusPercentCalc () {
+function bonusPercentCalc (employee) {
+let bonusPercent = 0;
 
+if (employee.reviewRating <= 2) {
+  console.log('No Bonus for You');
+} else if (employee.reviewRating === 3) {
+  bonusPercent = .04;
+} else if (employee.reviewRating === 4) {
+  bonusPercent = .06;
+} else if (employee.reviewRating === 5) {
+  bonusPercent = .1;
+}
+
+if (employee.employeeNumber.length === 4){
+  bonusPercent += .05;
+}
+
+if (employee.annualSalary > 65000) {
+  bonusPercent -= .01;
+}
+
+if (bonusPercent > .13) {
+  bonusPercent = .13;
+} else if (bonusPercent < 0) {
+  bonusPercent = 0;
+}
+
+return bonusPercent;
 }
 
 function totalCompensationCalc () {
