@@ -46,7 +46,7 @@ const employees = [
 let employeesBonuses = [];
 
 function doesCoolStuff() {
-  for (person of employees){
+  for (person of employees) {
     employeesBonuses.push(generateBonusInfo(person));
   };
 };
@@ -59,23 +59,23 @@ function doesCoolStuff() {
 
 // constructor
 
-function EmployeeBonus(name, bonusPercentage, totalCompensation, totalBonus){
+function EmployeeBonus(name, bonusPercentage, totalCompensation, totalBonus) {
   this.name = name;
   this.bonusPercentage = bonusPercentage;
   this.totalCompensation = totalCompensation;
   this.totalBonus = totalBonus;
 }
 
-function generateBonusInfo(employee){
-let employeeBonusInfo = new EmployeeBonus(
-  name = employee.name,
-  bonusPercentage = bonusPercentCalc(employee),
-  totalCompensation = totalCompensationCalc(employee.annualSalary, this.bonusPercentage),
-  totalBonus = totalBonusCalc()
-)
+function generateBonusInfo(employee) {
+  let employeeBonusInfo = new EmployeeBonus(
+    name = employee.name,
+    bonusPercentage = bonusPercentCalc(employee),
+    totalCompensation = totalCompensationCalc(employee.annualSalary, this.bonusPercentage),
+    totalBonus = totalBonusCalc()
+  )
 
   // 
-return employeeBonusInfo;
+  return employeeBonusInfo;
 };
 
 // ### Individual Bonus calculation
@@ -90,43 +90,43 @@ return employeeBonusInfo;
 // - However, if their annual income is greater than $65, 000, they should have their bonus adjusted down 1 %.
 // - No bonus can be above 13 % or below 0 % total.
 
-function bonusPercentCalc (employee) {
-let bonusPercent = 0;
+function bonusPercentCalc(employee) {
+  let bonusPercent = 0;
 
-if (employee.reviewRating <= 2) {
-  console.log('No Bonus for You');
-} else if (employee.reviewRating === 3) {
-  bonusPercent = .04;
-} else if (employee.reviewRating === 4) {
-  bonusPercent = .06;
-} else if (employee.reviewRating === 5) {
-  bonusPercent = .1;
+  if (employee.reviewRating <= 2) {
+    console.log('No Bonus for You');
+  } else if (employee.reviewRating === 3) {
+    bonusPercent = .04;
+  } else if (employee.reviewRating === 4) {
+    bonusPercent = .06;
+  } else if (employee.reviewRating === 5) {
+    bonusPercent = .1;
+  }
+
+  if (employee.employeeNumber.length === 4) {
+    bonusPercent += .05;
+  }
+
+  if (employee.annualSalary > 65000) {
+    bonusPercent -= .01;
+  }
+
+  if (bonusPercent > .13) {
+    bonusPercent = .13;
+  } else if (bonusPercent < 0) {
+    bonusPercent = 0;
+  }
+
+  return bonusPercent;
 }
 
-if (employee.employeeNumber.length === 4){
-  bonusPercent += .05;
-}
-
-if (employee.annualSalary > 65000) {
-  bonusPercent -= .01;
-}
-
-if (bonusPercent > .13) {
-  bonusPercent = .13;
-} else if (bonusPercent < 0) {
-  bonusPercent = 0;
-}
-
-return bonusPercent;
-}
-
-function totalCompensationCalc (salary, bonusPercent) {
+function totalCompensationCalc(salary, bonusPercent) {
   console.log(salary, bonusPercent);
-  
-  return (salary + (salary*bonusPercent));
+
+  return (salary + (salary * bonusPercent));
 }
 
-function totalBonusCalc (){
+function totalBonusCalc() {
 
 }
-console.log( employees );
+console.log(employees);
