@@ -47,9 +47,11 @@ let employeesBonuses = [];
 
 function doesCoolStuff() {
   for (person of employees) {
+    console.log( 'Current person:', person );
+    console.log( 'Bonus info:', generateBonusInfo(person) );
     employeesBonuses.push(generateBonusInfo(person));
-  };
-};
+  }
+}
 
 // Write a declared function that takes in one ** Employee ** object(as an argument to the function), and returns a new ** object ** with the following properties:
 // The`name` property should contain the employee's name.
@@ -71,12 +73,12 @@ function generateBonusInfo(employee) {
     name = employee.name,
     bonusPercentage = bonusPercentCalc(employee),
     totalCompensation = totalCompensationCalc(employee.annualSalary, this.bonusPercentage),
-    totalBonus = totalBonusCalc()
+    totalBonus = totalBonusCalc(employee.annualSalary, this.bonusPercentage)
   )
 
   // 
   return employeeBonusInfo;
-};
+}
 
 // ### Individual Bonus calculation
 // - Those who have a rating of a 2 or below should not receive a bonus.
@@ -123,10 +125,14 @@ function bonusPercentCalc(employee) {
 function totalCompensationCalc(salary, bonusPercent) {
   console.log(salary, bonusPercent);
 
-  return (salary + (salary * bonusPercent));
+  return Math.round(salary + (salary * bonusPercent));
 }
 
-function totalBonusCalc() {
-
+function totalBonusCalc(salary, bonusPercent) {
+  return Math.round(salary * bonusPercent);
 }
-console.log(employees);
+
+console.log( 'Employees:', employees );
+doesCoolStuff(employees);
+console.log( 'Employee bonus data:', employeesBonuses );
+
