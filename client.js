@@ -123,8 +123,11 @@ function bonusPercentCalc(employee) {
 }
 
 function totalCompensationCalc(salary, bonusPercent) {
-  console.log(salary, bonusPercent);
-
+  console.log('in totalCompensationCalc',salary, bonusPercent);
+  console.log('salary * bonusPercent', (salary * bonusPercent));
+  console.log('salary + (salary * bonusPercent)', (salary + (salary * bonusPercent)));
+  salary = parseInt(salary);
+  console.log('parseInt-ed salary + (salary * bonusPercent)', (salary + (salary * bonusPercent)));
   return Math.round(salary + (salary * bonusPercent));
 }
 
